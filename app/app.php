@@ -13,8 +13,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
+$app->register(new Silex\Provider\AssetServiceProvider(), array(
+    'assets.version' => 'v1'
+));
+
 // Register services
-$app['dao.link'] = $app->share(function ($app) {
+$app['dao.link'] = function ($app) {
     $linkDAO = new WebLinks\DAO\LinkDAO($app['db']);
     return $linkDAO;
-});
+};

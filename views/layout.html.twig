@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ app.request.basepath }}/css/weblinks.css" rel="stylesheet">
+    <link href="{{ asset('/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/weblinks.css') }}" rel="stylesheet">
     <title>WebLinks - {% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -31,8 +31,8 @@
     </div>
 
     <!-- jQuery -->
-    <script src="{{ app.request.basepath }}/lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="{{ asset('/lib/jquery/jquery-1.11.1.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
-    <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 </html>
