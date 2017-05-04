@@ -47,8 +47,8 @@ class LinkDAO extends DAO
     protected function buildDomainObject(array $row) {
         $link = new Link();
         $link->setId($row['link_id']);
-        $link->setUrl($row['link_title']);
-        $link->setTitle($row['link_url']);
+        $link->setUrl($row['link_url']);
+        $link->setTitle($row['link_title']);
 		
 		if(array_key_exists('user_id', $row)) {
             // Find and set the associated user
