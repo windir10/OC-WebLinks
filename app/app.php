@@ -18,12 +18,13 @@ $app->register(new Silex\Provider\AssetServiceProvider(), array(
 ));
 
 // Register DAOs
-$app['dao.link'] = function ($app) {
-    $linkDAO = new WebLinks\DAO\LinkDAO($app['db']);
-    return $linkDAO;
-};
-
 $app['dao.user'] = function ($app) {
     $userDAO = new WebLinks\DAO\UserDAO($app['db']);
 	return $userDAO;
+};
+
+$app['dao.link'] = function ($app) {
+    $linkDAO = new WebLinks\DAO\LinkDAO($app['db']);
+	$linkDAO->setUserDAO($app['dao.user']);
+    return $linkDAO;
 };

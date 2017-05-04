@@ -6,6 +6,20 @@ use WebLinks\Domain\Link;
 
 class LinkDAO extends DAO 
 {
+	/**
+     * @var \WebLinks\DAO\UserDAO
+     */
+    private $userDAO;
+
+	/**
+	 * Setting the associated UserDAO
+	 * 
+	 * @param \WebLinks\DAO\UserDAO $userDAO
+	 */
+    public function setUserDAO(UserDAO $userDAO) {
+        $this->userDAO = $userDAO;
+    }
+	
     /**
      * Returns a list of all links, sorted by id.
      *
@@ -30,11 +44,18 @@ class LinkDAO extends DAO
      * @param array $row The DB row containing Link data.
      * @return \WebLinks\Domain\Link
      */
-    protected function buildDomainObject($row) {
+    protected function buildDomainObject(array $row) {
         $link = new Link();
         $link->setId($row['link_id']);
         $link->setUrl($row['link_title']);
         $link->setTitle($row['link_url']);
+		
+		if(array_key_exists('user_id', $row)) {
+            // Find and set the associated user
+            $userId = $row['user_id'];
+            $user = $this->userDAO->find($userId);
+            $link->setUser($user);
+        }
         
         return $link;
     }
