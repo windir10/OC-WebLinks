@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 						<ul class="nav navbar-nav">
-							<li><a href="#">Submit link</a></li>
+							<li><a href="{{ path('submitlink') }}">Submit link</a></li>
 						</ul>
 					{% endif %}
 					<ul class="nav navbar-nav navbar-right">

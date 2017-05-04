@@ -37,6 +37,50 @@ class LinkDAO extends DAO
         }
         return $entities;
     }
+	
+	/**
+	 * Save a link into database
+	 * 
+	 * @param Link $link The link object to save
+	 */
+	public function save(Link $link) {
+        $linkData = array(
+            'link_title' => $link->getTitle(),
+            'link_url' => $link->getUrl(),
+            'user_id' => $link->getUser()->getId()
+            );
+
+        if ($link->getId()) {
+            // The link has already been saved : update it
+            $this->getDb()->update('t_link', $linkData, array('link_id' => $link->getId()));
+        } else {
+            // The link has never been saved : insert it
+            $this->getDb()->insert('t_link', $linkData);
+            // Get the id of the newly created comment and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $link->setId($id);
+        }
+    }
+	
+	/**
+	 * Delete a link by id from database
+	 * 
+	 * @param integer $id The link's id to delete
+	 */
+	public function delete($id) {
+        // Delete the link
+        $this->getDb()->delete('t_link', array('link_id' => $id));
+    }
+	
+	/**
+	 * Delete a link by user's id from database
+	 * 
+	 * @param integer $id The user's id
+	 */
+	public function deleteAllByUser($id) {
+        // Delete links
+        $this->getDb()->delete('t_link', array('user_id' => $id));
+    }
 
     /**
      * Creates an Link object based on a DB row.
