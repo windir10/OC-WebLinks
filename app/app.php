@@ -51,6 +51,13 @@ $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\LocaleServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
 
+// Register logs service
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => __DIR__.'/../var/logs/weblinks.log',
+    'monolog.name' => 'WebLinks',
+    'monolog.level' => $app['monolog.level']
+));
+
 // Register DAOs
 $app['dao.user'] = function ($app) {
     $userDAO = new WebLinks\DAO\UserDAO($app['db']);
@@ -64,7 +71,7 @@ $app['dao.link'] = function ($app) {
 };
 
 // Error manager with custom page/message
-/*$app->error(function (\Exception $e, Request $request, $code) use ($app) {
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
     switch ($code) {
         case 403:
             $message = 'Access denied.';
@@ -76,7 +83,7 @@ $app['dao.link'] = function ($app) {
             $message = "Something went wrong.";
     }
     return $app['twig']->render('error.html.twig', array('message' => $message));
-});*/
+});
 
 // Register JSON data decoder for JSON requests
 $app->before(function (Request $request) {
