@@ -23,12 +23,12 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 						<ul class="nav navbar-nav">
-							<li><a href="{{ path('submitlink') }}">Submit link</a></li>
+							<li class="{% if frontMenu is defined %}active{% endif %}"><a href="{{ path('submitlink') }}">Submit link</a></li>
 						</ul>
 					{% endif %}
 					<ul class="nav navbar-nav navbar-right">
 						{% if app.user and is_granted('ROLE_ADMIN') %}
-							<li class="{% if adminMenu is defined %}active{% endif %}"><a href="#path_admin"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
+							<li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
 						{% endif %}
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="dropdown">

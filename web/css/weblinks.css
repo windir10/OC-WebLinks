@@ -1,3 +1,12 @@
 body { 
     padding-top: 70px; 
 }
+
+.linkTitle:hover, .linkTitle:focus {
+    text-decoration: none;
+}
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

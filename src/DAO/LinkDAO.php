@@ -20,6 +20,25 @@ class LinkDAO extends DAO
         $this->userDAO = $userDAO;
     }
 	
+	/**
+     * Returns a link matching the supplied id.
+     *
+     * @param integer $id The link id.
+     *
+     * @return \WebLinks\Domain\Link|throws an exception if no matching user is found
+     */
+    public function find($id) {
+        $sql = "select * from t_link where link_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row) {
+            return $this->buildDomainObject($row);
+		}
+        else {
+            throw new \Exception("No link matching id " . $id);
+		}
+    }
+	
     /**
      * Returns a list of all links, sorted by id.
      *

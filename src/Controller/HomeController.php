@@ -61,8 +61,10 @@ class HomeController {
 			$linkFormView = $linkForm->createView();
         }
         
-        return $app['twig']->render('submitlink.html.twig', array(
+        return $app['twig']->render('link_form.html.twig', array(
 			'linkForm' => $linkFormView,
+			'title' => 'New link',
+			'frontMenu' => true, // for setting active style for item menu "Submit link"
 		));
     }
 }

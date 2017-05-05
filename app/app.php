@@ -63,7 +63,7 @@ $app['dao.link'] = function ($app) {
     return $linkDAO;
 };
 
-// Register error handler
+// Error manager with custom page/message
 /*$app->error(function (\Exception $e, Request $request, $code) use ($app) {
     switch ($code) {
         case 403:
