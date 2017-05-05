@@ -25,8 +25,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         'ROLE_ADMIN' => array('ROLE_USER'),
     ),
     'security.access_rules' => array(
-        array('^/admin', 'ROLE_ADMIN'),
-		// to do : rules for add link
+        array('^/admin', 'ROLE_ADMIN'), // admin folder only for ROLE_ADMIN
+		array('^/link/submit', 'ROLE_USER'), // link submit form only for connected users
     ),
 ));
 
